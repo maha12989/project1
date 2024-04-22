@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from .models import Blood_group, Info
 
 # Create your views here.
 def index(request) :
@@ -14,10 +15,14 @@ def about(request) :
 def info(request) :
    context = {}
    context['title'] = 'Info page'
+   info = Info.objects.all()
+   context['info'] = info
    return render(request, 'info.html', context)
 
 def blood(request) :
    context = {}
    context['title'] = 'BG page'
+   blood = Blood_group.objects.all()
+   context['blood'] = blood
    return render(request, 'blood.html', context)
 

@@ -2,4 +2,24 @@
 
 {% block content %}
    <h1> This is BG page</h1>
+
+<table class="table table-bordered text-center">
+   <thead>
+      <tr>
+         <th>Blood Group</th>
+         <th>Action</th>
+      </tr>
+   </thead>
+   <tbody>
+      {% for details in blood %}
+      <tr>
+         <td>{{details.blood_group}}</td>
+         <td>
+            <button formnovalidate name="edit" value="{{details.id}}">Edit</button>
+            <button formnovalidate name="delete" value="{{details.id}}">Delete</button>
+         </td>
+      </tr>
+      {% endfor %}
+   </tbody>
+</table>
 {% endblock content %}
