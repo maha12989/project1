@@ -21,9 +21,22 @@ def info(request) :
    form = InfoForm()
    if request.method == 'POST' :
       if 'save' in request.POST :
-         form = InfoForm(request.POST)
+         pk = request.POST.get('save')
+         if pk :
+            info = Info.objects.get(id = pk)
+            form = InfoForm(request.POST, instance=info)
+         else :
+            form = InfoForm(request.POST)
          form.save()
          form = InfoForm()
+      elif 'delete' in request.POST :
+         pk = request.POST.get('delete')
+         info = Info.objects.get(id = pk)
+         info.delete()
+      elif 'edit' in request.POST :
+         pk = request.POST.get('edit')
+         info = Info.objects.get(id = pk)
+         form = InfoForm(instance=info)
    context['form'] = form
    return render(request, 'info.html', context)
 
@@ -35,9 +48,22 @@ def blood(request) :
    form = BloodForm()
    if request.method == 'POST' :
       if 'save' in request.POST :
-         form = BloodForm(request.POST)
+         pk = request.POST.get('save')
+         if pk :
+            blood = Blood_group.objects.get(id = pk)
+            form = BloodForm(request.POST, instance=blood)
+         else :
+            form = BloodForm(request.POST)
          form.save()
          form = BloodForm()
+      elif 'delete' in request.POST :
+         pk = request.POST.get('delete')
+         blood = Blood_group.objects.get(id = pk)
+         blood.delete()
+      elif 'edit' in request.POST :
+         pk = request.POST.get('edit')
+         blood = Blood_group.objects.get(id = pk)
+         form = BloodForm(instance=blood)
    context['form'] = form
    return render(request, 'blood.html', context)
 

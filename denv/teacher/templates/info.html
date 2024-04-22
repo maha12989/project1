@@ -15,17 +15,17 @@
          <th>Action</th>
       </tr>
       <tr>
-         {% for fields in form %}
-           <td>{{fields}}</td>
-         {% endfor %}
-           <td>
-            <button name="save">Create</button>
-           </td>
+         {% if not form.instance.id %}
+            {% include 'save.html' %}
+         {% endif %}  
       </tr>
    </thead>
    <tbody>
       {% for details in info %}
-      <tr>
+         <tr>
+            {% if form.instance.id == details.id %}
+               {% include 'edit.html' %}
+            {% else %}
             <td>{{details.name}}</td>
             <td>{{details.age}}</td>
             <td>{{details.salary}}</td>
@@ -34,6 +34,7 @@
                <button formnovalidate name="edit" value="{{details.id}}">Edit</button>
                <button formnovalidate name="delete" value="{{details.id}}">Delete</button>
             </td>
+            {% endif %}
          </tr>
          {% endfor %}
    </tbody>
