@@ -32,5 +32,12 @@ def blood(request) :
    context['title'] = 'BG page'
    blood = Blood_group.objects.all()
    context['blood'] = blood
+   form = BloodForm()
+   if request.method == 'POST' :
+      if 'save' in request.POST :
+         form = BloodForm(request.POST)
+         form.save()
+         form = BloodForm()
+   context['form'] = form
    return render(request, 'blood.html', context)
 
