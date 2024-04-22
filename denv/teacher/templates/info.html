@@ -3,6 +3,8 @@
 {% block content %}
    <h1> This is Info page</h1>
 
+<form action="{% url 'info' %}" method="post">
+   {% csrf_token %}
 <table class="table table-bordered text-center">
    <thead>
       <tr>
@@ -11,6 +13,14 @@
          <th>Salary</th>
          <th>Blood group</th>
          <th>Action</th>
+      </tr>
+      <tr>
+         {% for fields in form %}
+           <td>{{fields}}</td>
+         {% endfor %}
+           <td>
+            <button name="save">Create</button>
+           </td>
       </tr>
    </thead>
    <tbody>
@@ -28,4 +38,5 @@
          {% endfor %}
    </tbody>
 </table>
+</form>
 {% endblock content %}
